@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <title>jQuery UI Accordion - No auto height</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="css/comm.css">
+ <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" type="text/css" media="all" />
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js" type="text/javascript"></script>
+ <link rel="stylesheet" href="css/swiper.min.css">
+
+ <!-- Swiper JS -->
+ <script src="js/swiper.min.js"></script>
+
+ <!-- 스와이퍼에 관한 설정입니다 -->
+ <script>
+  var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+    },
+    pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+    },
+    navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+    },
+});
+
+// 스와이퍼에 들어가는 애니메이션 효과에 대한 설명입니다.
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").animate({left: '250px'});
+  });
+});
+
+$('#zero').show();
+$('#zero').hide();
+$('#zero').show(1000); // 1000ms -> 1초
+$('#zero').hide('slow');
+$('#zero').toggle(1000, function() {
+  alert('짜잔!'); // 1초동안 나타나거나 사라진 다음 '짜잔!'하고 alert
+});
+
+
+$(function() {
+     var stop = false;
+     $( "#accordion h3" ).click(function( event ) {
+       if ( stop ) {
+         event.stopImmediatePropagation();
+         event.preventDefault();
+         stop = false;
+   }
+});
+     $( "#accordion").accordion({
+      collapsible: true,
+      autoHeight: false,
+    header: "> div > h3", //sort
+    //event: "mouseover",
+    event: "click hoverintent",
+    fillSpace: true //resize
+})
+     .sortable({
+      axis: "y",
+      handle: "h3",
+      stop: function() {
+        stop = true;
+  }
+});
+
+// 아래에 맨 위로가기 토글을 위한 스크립트 입니다.
+     // hide #back-top first
+     $("#back-top").hide();
+
+// fade in #back-top
+$(function () {
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 1500) {
+      $('#back-top').fadeIn();
+} else {
+      $('#back-top').fadeOut();
+}
+});
+    // scroll body to 0px on click
+    $('#back-top a').click(function () {
+      $('body,html').animate({
+        scrollTop: 0
+  }, 1000);
+      return false;
+});
+});
+// 출처: http://uidevelop.tistory.com/34 [UI Develop]
+
+   //div resize
+
+   // 리사이징에 관한 설정입니다.
+
+   // $( "#accordionResizer" ).resizable({
+   //  minHeight: 140,
+   //  resize: function() {
+   //   $( "#accordion" ).accordion( "resize" );
+   //  }
+   // });
+});
+
+</script>
+
+</head>
+<body>
+
+    <!-- 아 코딩 하기 너무 힘들다 -->
+
+    <!--start wrap -->
+    <div class="wrap">
+        <!-- start header -->
+        <div class="header">
+            <!-- start menu -->
+            <div class="menu">
+                 <p id="back-top">
+                      <a href="top">TOP</a>
+                </p>
+                <div class="wrap_logo">
+                      <div class="logo">
+                          <a href="#" class="blind logo">logo</a>
+                    </div>
+              </div>
+              <div class="wrap_menu_a">
+                 <div class="menu_a">
+                     <ul class="menu_txt1">
+                         <li><a href="#">About US</a></li>
+                         <li><a href="#">About US</a></li>
+                   </ul>
+                   <div class="wrap_menu_txt2">
+                         <ul class="menu_txt2">
+                             <li><a href="#">HOME</a></li>
+                             <li><a href="#">DEMOS</a></li>
+                             <li><a href="#">SHORTCODES</a></li>
+                             <li><a href="#">FEATURES</a></li>
+                             <li><a href="#">PAGES</a></li>
+                             <li><a href="#">PORTFOLIO</a></li>
+                             <li><a href="#">PAGES</a></li>
+                             <li><a href="#">CONTACT US</a></li>
+                       </ul>
+                       <ul class="menu_sns">
+                             <li><a href="#" class="btn_g icon_t"></a></li>
+                             <li><a href="#" class="btn_g icon_f"></a></li>
+                             <li><a href="#" class="btn_g icon_y"></a></li>
+                             <li><a href="#" class="btn_g icon_w"></a></li>
+                       </ul>
+                 </div>
+           </div>
+     </div>
+</div>
+<div class="slide">
+
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="imgs/slide1.jpg" alt="">
+            <div class="slide_wrap_box">
+                  <div class="slide_txt">
+                        <p>DO YOU NEED A NEW</p>
+                        <h2>WEB DESIGN?</h2>
+                        <p>Check out our options and features.</p>
+                  </div>
+                  <div class="slide_button">
+                        <a href="#">Get Started Now</a>
+                  </div>
+            </div>
+      </div>
+            <div class="swiper-slide"><img src="imgs/slide3.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="imgs/slide4.jpg" alt=""></div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+</div>
+
+<!-- Swiper JS -->
+<script src="../dist/js/swiper.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+  },
+  pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+  },
+  navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+  },
+});
+</script>
+
+</div>
+</div>
+
+<!-- end slide -->
+<!-- start conA -->
+<div class="conA">
+    <div class="conA_header">
+        <div class="conA_wrap_box">
+             <div class="conA_box">
+                  <div class="conA_box_txt">
+                      <h2 class="conA_header_txt1">Porto is ready for <b>any design style</b>...</h2>
+                      <p class="conA_header_txt2"><b>Here are some</b> premade options you can choose </p>
+                </div>
+                <div class="conA_button">
+                      <a href="#">Purchase Now!</a>
+                </div>
+          </div>
+    </div>
+</div>
+<hr class="style-two"></hr>
+<div class="conA_top">
+     <h3 class="conA_top_txt1">Porto is the <b>most popular</b> HTML Site Template on ThemeFores.</h3>
+     <p class="conA_top_txt2">Trusted by over 25,000 satisfied users, Porto is a huge success<br>
+         in the of one of the world’s largest MarketPlace.
+   </p>
+</div>
+<div class="conA_bottom">
+     <div class="conA_bottom_box">
+         <div class="b_g box1">
+             <div class="icono-sliders"></div>
+             <h2>30000+</h2>
+             <h3>Happy Clients</h3>
+             <p>They can't be wrong</p>
+       </div>
+       <div class="b_g box2">
+             <div class="icono-image"></div>
+             <h2>19</h2>
+             <h3>Premade HomePages</h3>
+             <p>Many more to come</p>
+       </div>
+       <div class="b_g box3">
+             <div class="icono-gear"></div>
+             <h2>2500+</h2>
+             <h3>Answered Tickets</h3>
+             <p>Satisfaction guaranteed</p>
+       </div>
+       <div class="b_g box4">
+             <div class="icono-tag"></div>
+             <h2>3000+</h2>
+             <h3>Development Hours</h3>
+             <p>Available to you for only $16</p>
+       </div>
+ </div>
+ <!-- 경계선이 들어가는 부분입니다 -->
+ <hr class="style-two"></hr>
+</div>
+<!-- start conA_bottom2 -->
+<div class="conA_bottom2">
+     <div class="conA_bottom2_content">
+          <div class="conA_bottom2_img"></div>
+          <div class="conA_bottom2_txt">
+               <h2><b>Layout</b> Styles & Variants
+               </h2>
+               <p>There are so many styles you can combine that is possible to create almost any kind of layout based on Porto Template, navigate in our preview and see the header variations, the colors, and the page content types that you will be able to use.
+               </p>
+               <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet hendrerit volutpat. Sed in nunc nec ligula consectetur mollis in vel justo. Vestibulum ante ipsum primis in faucibus orci.
+               </small>
+
+         </div>
+   </div>
+</div>
+<!-- end conA_bottom2 -->
+<hr class="style-two"></hr>
+<!--start conA_bottom3 -->
+<div class="conA_bottom2">
+     <div class="conA_bottom2_content">
+          <div class="conA_bottom2_txt">
+               <h2>Exclusive <b>Style Switcher</b>
+               </h2>
+               <p>With our exlusive Style Switcher you will be able to choose any color you want for your website, choose the layout style (wide / boxed), website type (one page / normal), then generate the css that will be compiled by a {less} proccessor.
+               </p>
+               <small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur imperdiet hendrerit volutpat. Sed in nunc nec ligula consectetur mollis in vel justo. Vestibulum ante ipsum primis in faucibus orci.
+               </small>
+         </div>
+         <div class="conA_bottom2_img">
+
+         </div>
+   </div>
+</div>
+</div>
+<!--start conB -->
+<div class="conB">
+     <!-- start conB middle -->
+     <div class="conB_wrap_middle">
+          <div class="conB_middle">
+               <div class="conB_content1">
+                    <h2 class="conB_row_title">Our <strong>Features</strong></h2>
+                    <div class="conB_wrap_row">
+                         <div class="conB_row1">
+                              <ul>
+                                   <li>
+                                        <span> <i class="fa fa-comment fa-2x" aria-hidden="true"></i>
+</span>
+                                        <h2>Customer Support</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                                  </li>
+                                  <li>
+                                        <h2>HTML5 / CSS3 / JS</h2>
+                                        <p>Lorem ipsum dolor sit amet.</p>          
+                                  </li>
+                                  <li>
+                                        <h2>500+ Google Fonts</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                                  </li>
+                                  <li>
+                                        <h2>Colors</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                                  </li>
+                            </ul>
+                      </div>
+                      <div class="conB_row2">
+                           <ul>
+                                <li>
+                                     <h2>Sliders</h2>
+                                     <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                               </li>
+                               <li>
+                                     <h2>Icons</h2>
+                                     <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                               </li>
+                               <li>
+                                     <h2>Buttons</h2>
+                                     <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                               </li>
+                               <li>
+                                     <h2>Lightbox</h2>
+                                     <p>Lorem ipsum dolor sit amet, consectetur.</p>          
+                               </li>
+                         </ul>
+                   </div>
+             </div>
+       </div>
+       <!--end conB_row -->
+       <div class="conB_content2">
+           <h2 class="conB_row_title">Our <strong>section</strong></h2>
+           <div id="accordionResizer" class="ui-widget-content">
+                <!-- start accordion -->
+                <div id="accordion">
+                     <div>
+                         <h3><a href="#">Section 1</a></h3>
+                         <div>
+                             <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque.</p>
+                       </div>
+                 </div>
+                 <div>
+                    <h3><a href="#">Section 2</a></h3>
+                    <div>
+                        <p>Sed non urna.</p>
+                  </div>
+            </div>
+            <div>
+               <h3><a href="#">Section 3</a></h3>
+               <div>
+                   <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.</p>
+             </div>
+       </div>
+       <div>
+          <h3><a href="#">Section 4</a></h3>
+          <div>    <p>Cras dictum.</p>
+          </div>
+    </div>
+</div>
+<!-- end accordion -->
+</div>
+</div>
+</div>
+<!-- end conB middle -->
+</div>
+<div class="conB_wrap_bottom">
+     <div class="conB_bottom">
+          <hr class="style-two"></hr>
+          <!-- start conB_top -->
+          <div class="conB_top">
+               <h3 class="conB_top_txt1">
+                    Our<b> Portfolio</b>
+              </h3>
+              <p class="conB_top_txt2">
+                    Check out what we have been doing
+              </p>
+        </div>
+        <div class="conB_bottom_box">
+           <ul>
+                <li>
+                    <span class="img_title">
+                         <span class="img_txt"><a href="#">Project Title</a></span>
+                         <span class="img_button"><a href="#">Project Type</a></span>
+                   </span>
+                   <a href="#" class="b_g2 img1">
+                   </a>
+             </li>
+             <li>
+               <span class="img_title">
+                    <span class="img_txt"><a href="#">Project Title</a></span>
+                    <span class="img_button"><a href="#">Project Type</a></span>
+              </span>
+              <a href="#" class="b_g2 img2">
+              </a>
+        </li>
+        <li>
+           <span class="img_title">
+                <span class="img_txt"><a href="#">Project Title</a></span>
+                <span class="img_button"><a href="#">Project Type</a></span>
+          </span>
+          <a href="#" class="b_g2 img3">
+          </a>
+    </li>
+    <li>
+     <span class="img_title">
+          <span class="img_txt"><a href="#">Project Title</a></span>
+          <span class="img_button"><a href="#">Project Type</a></span>
+    </span>
+    <a href="#" class="b_g2 img4">
+    </a>
+</li>
+<li>
+     <span class="img_title">
+          <span class="img_txt"><a href="#">Project Title</a></span>
+          <span class="img_button"><a href="#">Project Type</a></span>
+    </span>
+    <a href="#" class="b_g2 img5">
+    </a>
+</li>
+</ul>
+</div>
+<!--end conB_top -->
+</div>
+</div>
+</div>
+<!-- end conB -->
+<!-- end wrap_contents -->
+<div class="wrap_footer">
+     <div class="footer">
+          <div class="footer_content">
+               <div class="g_f footer_row1">
+                    <h2>Newsletter</h2>
+                    <p>Keep up on our always evolving product features and technology. Enter your e-mail and subscribe to our newsletter.</p>
+                    <div class="submit">
+                        <form action="../html/index.html">
+                            <label for="fname">Your Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                            <input type="submit" value="Submit">
+                      </form>
+                </div>
+          </div>
+          <div class="g_f footer_row2">
+           <h2>Latest Tweets</h2>
+           <p> If you have any suggestions for the next updates, let us know.</p>
+           <a href="#">07:05 AM Sep 18th</a>
+           <p> We have just updated Porto Admin. Check the changelog for more information.
+           </p>
+           <a href="#">07:04 AM Sep 18th</a>
+     </div>
+     <div class="g_f footer_row3">
+           <h2>Contact Us</h2>
+           <p>Address: 1234 Street Name, City Name, United States<br>
+               Phone: <a href="tel:123-456-789">(123) 456-789</a>  
+               <br>Email: <a href="mailto:dkdkwl@naver.com">dkdkwl@naver.com</a></p>
+         </div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+<!-- end wrap --> 
+</body>
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</html>
